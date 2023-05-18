@@ -1,3 +1,4 @@
+//importing of all the required modules
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -10,9 +11,10 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-// This allows any cross-origin request to access resources on our web page.
+//body-parser extracts the entire body portion of an incoming request stream and exposes it on req.body.
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+// This allows any cross-origin request to access resources on our web page.
 app.use(cors());
 
 //routes
@@ -27,9 +29,5 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
-
-    /* ADD DATA ONE TIME */
-    // User.insertMany(users);
-    // Post.insertMany(posts);
   })
   .catch((error) => console.log(`${error} did not connect`));

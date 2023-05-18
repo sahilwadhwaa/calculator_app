@@ -1,3 +1,5 @@
+//used data from this file before connect my react app to the backend
+
 export const dummyData = [
     {
       Name: "Multiply",

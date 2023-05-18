@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { Screen } from "./components/Screen";
 import { Keypad } from "./components/Keypad";
 import { CalcName } from './components/CalcName';
@@ -7,30 +6,41 @@ import { Calculations } from './components/Calculations';
 import { useState } from 'react';
 
 function App() {
+
+  //to display on the calculator screen
   const [display, setDisplay]= useState("00")
   const [calc, setCalc]= useState("")
   //console.log(calc)
 
+  if(display.length=== 0) setDisplay("00")
+
   function updateDisplay(token) {
-    //if(display=== "") setDisplay("00")
+
+    if(display.length === 0) setDisplay("00")
+
     if (display === "00") {
-      setDisplay(token);
-    } else if(token ==="DEL"){
-      setDisplay(display.substring(0, display.length - 1))
-    }else if(token ==="AC"){
-      setDisplay("00")
-    }else if(token === "%") setDisplay((display/100).toFixed(2).toString())
+      if(token ==="AC") setDisplay("00")
+      if(token ==="DEL") setDisplay("00")
+      else setDisplay(token);
+    } 
+    else if(token ==="DEL") setDisplay(display.substring(0, display.length - 1))
+
+    else if(token ==="AC") setDisplay("00")
+
+    else if(token === "%") setDisplay((display/100).toFixed(2).toString())
     else {
       setDisplay(display + token);
       setCalc(display+token)
     }
   }
 
+  //function for enabling the recalculation of previous calculations
   function resetDisplay(val){
     setDisplay(val)
   }
 
   function calculate() {
+    //main  calculator logic
 
     for(let i=0; i<display.length;i++){
       if(display[i]==="+"){
@@ -55,18 +65,19 @@ function App() {
       }
     }
   }
+
   return (
-    <div className="flex justify-around">
+    <div className="xl:flex justify-around md:block">
       <div className='left'>
-        <h1 className="text-3xl font-bold py-5">
+        <h1 className="text-3xl font-bold py-5 text-center md:text-left">
             Calculator
           </h1>
-          <div >
+          <div className='mx-10 sm:mx-0' >
             <Screen display= {display}/>
             <Keypad updateDisplay= {updateDisplay} calculate={calculate} />
           </div>
           <div className='calc_name'>
-            <CalcName display={display} calc={calc}  />
+            <CalcName display={display} calc={calc} resetDisplay= {resetDisplay} />
           </div>
       </div>
       <div className='right'>
