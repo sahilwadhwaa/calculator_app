@@ -1,6 +1,7 @@
 # Calculator App
 
 A not-so simple calculator application that allows users to perform basic calculations and view their calculation history. The app provides a user-friendly interface for performing operations such as addition, subtraction, multiplication, division, and percentage calculations. Additionally, users have the ability to recalculate past calculations and delete entries from their history.
+Hosted Link- https://number-nexus.netlify.app/
 
 ## Features
 
